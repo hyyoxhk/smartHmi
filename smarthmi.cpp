@@ -16,23 +16,24 @@
 static QGuiApplication *createApp(int &argc, char **argv)
 {
     QGuiApplication *app = new QGuiApplication(argc, argv);
-    return app;
-}
-
-SmartHmi::SmartHmi(int &argc, char **argv)
-    : m_app(createApp(argc, argv))
-{
-//    m_config = new Config(this);
 
     QTranslator translator;
     const QStringList uiLanguages = QLocale::system().uiLanguages();
     for (const QString &locale : uiLanguages) {
         const QString baseName = "smartHmi_" + QLocale(locale).name();
         if (translator.load(":/i18n/" + baseName)) {
-            m_app->installTranslator(&translator);
+            app->installTranslator(&translator);
             break;
         }
     }
+
+    return app;
+}
+
+SmartHmi::SmartHmi(int &argc, char **argv)
+    : m_app(createApp(argc, argv))
+{
+    //m_config = new Config(this);
 
     m_engine = new QQmlApplicationEngine(this);
     const QUrl url(QStringLiteral("qrc:/main.qml"));
