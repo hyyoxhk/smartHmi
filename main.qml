@@ -1,3 +1,8 @@
+// SPDX-License-Identifier: MIT
+/*
+ * Copyright (C) 2022 He Yong <hyyoxhk@163.com>
+ */
+
 import QtQuick 2.15
 import QtQuick.Window 2.15
 
